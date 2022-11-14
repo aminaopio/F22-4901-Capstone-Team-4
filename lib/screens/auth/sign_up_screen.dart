@@ -3,12 +3,18 @@ import 'package:flutter_mmh/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'components/sign_up_form.dart';
+import '../../services/auth.dart';
 
 class SignUpScreen extends StatelessWidget {
   // It's time to validat the text field
   final _formKey = GlobalKey<FormState>();
+
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  final _userNameTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +65,13 @@ class SignUpScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
+                            User? user = await FireAuth.registerEmailPass(
+
+                            username: _userNameTextController.text, 
+                            email: _emailTextController.text,
+                            password: _passwordTextController.text);
                             // Sign up form is done
                             // It saved our inputs
                             _formKey.currentState!.save();

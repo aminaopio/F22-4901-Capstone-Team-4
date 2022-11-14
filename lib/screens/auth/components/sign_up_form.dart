@@ -11,8 +11,10 @@ class SignUpForm extends StatelessWidget {
 
   final GlobalKey formKey;
 
-  late String _userName, _email, _password, _phoneNumber;
-
+  late String _userName, _email, _password;
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  final _userNameTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -24,6 +26,7 @@ class SignUpForm extends StatelessWidget {
           TextFormField(
             decoration: InputDecoration(hintText: "theflutterway"),
             validator: RequiredValidator(errorText: "Username is required"),
+            controller: _userNameTextController,
             // Let's save our username
             onSaved: (username) => _userName = username!,
           ),
@@ -36,16 +39,17 @@ class SignUpForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(hintText: "test@email.com"),
             validator: EmailValidator(errorText: "Use a valid email!"),
+            controller: _emailTextController,
             onSaved: (email) => _email = email!,
           ),
           const SizedBox(height: defaultPadding),
-          TextFieldName(text: "Phone"),
+          TextFieldName(text: "Name"),
           // Same for phone number
           TextFormField(
             keyboardType: TextInputType.phone,
-            decoration: InputDecoration(hintText: "+123487697"),
-            validator: RequiredValidator(errorText: "Phone number is required"),
-            onSaved: (phoneNumber) => _phoneNumber = phoneNumber!,
+            decoration: InputDecoration(hintText: "Name"),
+            validator: RequiredValidator(errorText: "Name is required"),
+            onSaved: (username) => _userName = username!,
           ),
           const SizedBox(height: defaultPadding),
           TextFieldName(text: "Password"),
