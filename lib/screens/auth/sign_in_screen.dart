@@ -1,8 +1,6 @@
 import 'package:flutter_mmh/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../constants.dart';
 import 'components/sign_in_form.dart';
 import '../../services/auth.dart';
@@ -20,10 +18,6 @@ class SignInScreen extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          SvgPicture.asset(
-            "assets/icons/Sign_Up_bg.svg",
-            height: MediaQuery.of(context).size.height,
-          ),
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
@@ -70,12 +64,15 @@ class SignInScreen extends StatelessWidget {
                               email: _emailTextController.text,
                               password: _passwordTextController.text,
                             );
-                            // Sign up form is done
-                            // It saved inputs
+                           
                             _formKey.currentState!.save();
-                            //  Sign in also done
+                          
                           }
                         },
+                         style: TextButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 121, 62, 249),
+                          minimumSize: Size.fromHeight(50),
+                        ),
                         child: Text("Sign In"),
                       ),
                     ),
